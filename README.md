@@ -23,10 +23,6 @@ issue, err := client.GetIssue("PROJ-123")
 data, err := client.DownloadAttachment(issue.Fields.Attachment[0])
 ```
 
-## Running the Example
-
-The example specifically fetches issues from `https://elkjop.atlassian.net` for Board ID `773`, as per the specs.
-
 ```bash
 # Provide the token
 export ATLASSIAN_KEY="your_scoped_jwt_token_here"
