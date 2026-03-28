@@ -20,40 +20,40 @@ type Issue struct {
 
 // Fields contains the interesting properties of an issue
 type Fields struct {
-	Summary        string          `json:"summary"`
-	Description    string          `json:"description,omitempty"`
-	Status         Status          `json:"status"`
-	IssueType      IssueType       `json:"issuetype"`
-	Project        Project         `json:"project"`
-	Priority       *Priority       `json:"priority,omitempty"`
-	Assignee       *User           `json:"assignee,omitempty"`
-	Reporter       *User           `json:"reporter,omitempty"`
-	Creator        *User           `json:"creator,omitempty"`
-	Created        string          `json:"created,omitempty"`
-	Updated        string          `json:"updated,omitempty"`
-	LastViewed     string          `json:"lastViewed,omitempty"`
-	DueDate        string          `json:"duedate,omitempty"`
-	Resolution     *Resolution     `json:"resolution,omitempty"`
-	ResolutionDate string          `json:"resolutiondate,omitempty"`
-	Labels         []string        `json:"labels,omitempty"`
-	Components     []Component     `json:"components,omitempty"`
-	Subtasks       []Issue         `json:"subtasks,omitempty"`
-	Attachment     []Attachment    `json:"attachment,omitempty"`
-	Progress       Progress        `json:"progress"`
-	Worklog        Worklog         `json:"worklog"`
-	Comment        Comment         `json:"comment"`
-	Votes          Votes           `json:"votes"`
-	Watches        Watches         `json:"watches"`
-	TimeTracking   TimeTracking    `json:"timetracking"`
-	Flagged        bool            `json:"flagged"`
-	StatusCategory StatusCategory  `json:"statusCategory"`
-	Sprint         interface{}     `json:"sprint,omitempty"`
-	Epic           interface{}     `json:"epic,omitempty"`
-	FixVersions    []Version       `json:"fixVersions,omitempty"`
-	Versions       []Version       `json:"versions,omitempty"`
-	IssueLinks     []interface{}   `json:"issuelinks,omitempty"`
-	Environment    string          `json:"environment,omitempty"`
-	Security       interface{}     `json:"security,omitempty"`
+	Summary        string         `json:"summary"`
+	Description    string         `json:"description,omitempty"`
+	Status         Status         `json:"status"`
+	IssueType      IssueType      `json:"issuetype"`
+	Project        Project        `json:"project"`
+	Priority       *Priority      `json:"priority,omitempty"`
+	Assignee       *User          `json:"assignee,omitempty"`
+	Reporter       *User          `json:"reporter,omitempty"`
+	Creator        *User          `json:"creator,omitempty"`
+	Created        string         `json:"created,omitempty"`
+	Updated        string         `json:"updated,omitempty"`
+	LastViewed     string         `json:"lastViewed,omitempty"`
+	DueDate        string         `json:"duedate,omitempty"`
+	Resolution     *Resolution    `json:"resolution,omitempty"`
+	ResolutionDate string         `json:"resolutiondate,omitempty"`
+	Labels         []string       `json:"labels,omitempty"`
+	Components     []Component    `json:"components,omitempty"`
+	Subtasks       []Issue        `json:"subtasks,omitempty"`
+	Attachment     []Attachment   `json:"attachment,omitempty"`
+	Progress       Progress       `json:"progress"`
+	Worklog        Worklog        `json:"worklog"`
+	Comment        Comment        `json:"comment"`
+	Votes          Votes          `json:"votes"`
+	Watches        Watches        `json:"watches"`
+	TimeTracking   TimeTracking   `json:"timetracking"`
+	Flagged        bool           `json:"flagged"`
+	StatusCategory StatusCategory `json:"statusCategory"`
+	Sprint         interface{}    `json:"sprint,omitempty"`
+	Epic           interface{}    `json:"epic,omitempty"`
+	FixVersions    []Version      `json:"fixVersions,omitempty"`
+	Versions       []Version      `json:"versions,omitempty"`
+	IssueLinks     []interface{}  `json:"issuelinks,omitempty"`
+	Environment    string         `json:"environment,omitempty"`
+	Security       interface{}    `json:"security,omitempty"`
 
 	// Custom Fields from JSON
 	CustomField10190 *CustomFieldOption `json:"customfield_10190,omitempty"`
@@ -280,4 +280,30 @@ type Version struct {
 	Archived    bool   `json:"archived"`
 	Released    bool   `json:"released"`
 	ReleaseDate string `json:"releaseDate,omitempty"`
+}
+
+// UserSearchResult represents a Jira user search response.
+type UserSearchResult []User
+
+// TransitionsResult represents the response from Jira issue transition listing
+type TransitionsResult struct {
+	Expand      string       `json:"expand,omitempty"`
+	Transitions []Transition `json:"transitions,omitempty"`
+}
+
+// Transition represents an available issue transition
+type Transition struct {
+	ID   string            `json:"id"`
+	Name string            `json:"name"`
+	To   *TransitionStatus `json:"to,omitempty"`
+}
+
+// TransitionStatus represents the target status for a transition
+type TransitionStatus struct {
+	Self           string          `json:"self,omitempty"`
+	Description    string          `json:"description,omitempty"`
+	IconURL        string          `json:"iconUrl,omitempty"`
+	Name           string          `json:"name,omitempty"`
+	ID             string          `json:"id,omitempty"`
+	StatusCategory *StatusCategory `json:"statusCategory,omitempty"`
 }
